@@ -76,3 +76,67 @@ export interface LoginResponse {
   token: string;
   user: User;
 }
+
+export interface ProblemLinkDto {
+  platform: string;
+  url: string;
+  isPrimary: boolean;
+}
+
+export interface SheetProblemDetail {
+  problemId: string;
+  name: string;
+  slug: string;
+  difficulty: Difficulty;
+  orderIndex: number;
+  links: ProblemLinkDto[];
+}
+
+export interface TopicGroup {
+  topicId: string;
+  name: string;
+  slug: string;
+  orderIndex: number;
+  problems: SheetProblemDetail[];
+}
+
+export interface SheetDetail {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  totalProblems: number;
+  topics: TopicGroup[];
+}
+
+export interface SheetProgress {
+  sheetId: string;
+  sheetName: string;
+  sheetSlug: string;
+  solved: number;
+  attempted: number;
+  total: number;
+}
+
+export interface OverallProgress {
+  totalSolved: number;
+  totalAttempted: number;
+  totalProblems: number;
+  sheets: SheetProgress[];
+}
+
+export interface TopicTag {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export interface WarehouseProblem {
+  id: string;
+  name: string;
+  slug: string;
+  difficulty: Difficulty;
+  topics: TopicTag[];
+  links: ProblemLinkDto[];
+  createdAt: string;
+}
