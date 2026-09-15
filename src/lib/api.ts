@@ -251,3 +251,11 @@ export const untagProblem = async (problemId: string, topicId: string, token: st
   });
   if (!res.ok) throw await res.json();
 };
+
+export const deleteProblem = async (problemId: string, token: string) => {
+  const res = await fetch(`${API_BASE_URL}/api/v1/problems/${problemId}`, {
+    method: 'DELETE',
+    headers: getHeaders(token),
+  });
+  if (!res.ok) throw await res.json();
+};

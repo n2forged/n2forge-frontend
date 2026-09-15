@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   getWarehouse, getAllSheets, getAllTopics2,
   assignProblemToSheet, assignTopicToSheet,
-  tagProblem, untagProblem,
+  tagProblem, untagProblem, deleteProblem,
 } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 import { WarehouseProblem, Sheet, Topic } from '@/types';
@@ -32,10 +32,16 @@ export default function WarehousePanel() {
   const [targetSheet, setTargetSheet] = useState('');
   const [targetTopic, setTargetTopic] = useState('');
   const [tagTopic, setTagTopic] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const refresh = useCallback(async () => {
     const token = getToken();
-    if (!token) return;
+    if (!token) {
+      setErr('Not signed in.');
+      setLoading(false);
+      return;
+    }
+    setErr('');
     try {
       const [w, s, t] = await Promise.all([
         getWarehouse(token), getAllSheets(), getAllTopics2(),
@@ -148,6 +154,31 @@ export default function WarehousePanel() {
     } catch {
       setErr('Could not remove tag.');
     }
+  };
+
+  const removeSelected = async () => {
+    setMsg(''); setErr('');
+    const token = getToken();
+    if (!token) return;
+
+    setBusy(true);
+    let ok = 0;
+    let failed = 0;
+
+    for (const id of Array.from(selected)) {
+      try {
+        await deleteProblem(id, token);
+        ok++;
+      } catch {
+        failed++;
+      }
+    }
+
+    setBusy(false);
+    setConfirmDelete(false);
+    setSelected(new Set());
+    setMsg(`Deleted ${ok} problem${ok === 1 ? '' : 's'}${failed ? ` · ${failed} failed` : ''}.`);
+    refresh();
   };
 
   if (loading) {
@@ -299,6 +330,15 @@ export default function WarehousePanel() {
             >
               Clear
             </button>
+
+            <button
+              onClick={() => setConfirmDelete(true)}
+              disabled={busy}
+              className="rounded-[4px] border border-[#3A211C] text-[13px] font-medium text-[#C9705F] transition-all hover:border-[#9E4B3F] hover:bg-[#170E0C] disabled:opacity-40"
+              style={{ padding: '0.7rem 1.2rem', marginLeft: 'auto' }}
+            >
+              Delete
+            </button>
           </div>
         </div>
       )}
@@ -375,6 +415,48 @@ export default function WarehousePanel() {
           </div>
         )}
       </div>
+      {confirmDelete && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(7,7,7,.8)' }}
+          onClick={() => setConfirmDelete(false)}
+        >
+          <div
+            className="w-full max-w-[420px] rounded-[6px] border border-[#2A2A2A] bg-[#0B0B0B]"
+            style={{ padding: '2rem' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="font-heading text-lg font-semibold text-[#F2F0EA]">
+              Delete {selected.size} problem{selected.size === 1 ? '' : 's'}?
+            </h3>
+            <p
+              className="text-[14px] font-light leading-[1.7] text-[#7C7C78]"
+              style={{ marginTop: '0.9rem' }}
+            >
+              This removes them from every sheet, drops their links and topic tags,
+              and cannot be undone.
+            </p>
+
+            <div className="flex items-center gap-3" style={{ marginTop: '2rem' }}>
+              <button
+                onClick={removeSelected}
+                disabled={busy}
+                className="rounded-[4px] bg-[#9E4B3F] font-heading text-[14px] font-semibold text-[#F2F0EA] transition-all hover:bg-[#B35849] disabled:opacity-40"
+                style={{ padding: '0.7rem 1.5rem' }}
+              >
+                {busy ? 'Deleting…' : 'Delete'}
+              </button>
+              <button
+                onClick={() => setConfirmDelete(false)}
+                className="rounded-[4px] border border-[#2A2A2A] text-[14px] font-medium text-[#7C7C78] transition-colors hover:text-[#F2F0EA]"
+                style={{ padding: '0.7rem 1.5rem' }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
