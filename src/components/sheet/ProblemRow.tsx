@@ -16,7 +16,6 @@ export default function ProblemRow({
   loggedIn,
   onToggleDone,
   onToggleRevision,
-  onOpen,
   onOpenNote,
 }: {
   problem: SheetProblemDetail;
@@ -26,7 +25,6 @@ export default function ProblemRow({
   loggedIn: boolean;
   onToggleDone: (problemId: string) => void;
   onToggleRevision: (problemId: string) => void;
-  onOpen: (problemId: string) => void;
   onOpenNote: (problemId: string) => void;
 }) {
   const primary =

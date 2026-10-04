@@ -14,7 +14,6 @@ export default function TopicBlock({
   loggedIn,
   onToggleDone,
   onToggleRevision,
-  onOpen,
   onOpenNote,
 }: {
   topic: TopicGroup;
@@ -26,7 +25,6 @@ export default function TopicBlock({
   loggedIn: boolean;
   onToggleDone: (problemId: string) => void;
   onToggleRevision: (problemId: string) => void;
-  onOpen: (problemId: string) => void;
   onOpenNote: (problemId: string) => void;
 }) {
   const [open, setOpen] = useState(index === 0);
@@ -123,7 +121,6 @@ export default function TopicBlock({
               loggedIn={loggedIn}
               onToggleDone={onToggleDone}
               onToggleRevision={onToggleRevision}
-              onOpen={onOpen}
               onOpenNote={onOpenNote}
             />
           ))}
