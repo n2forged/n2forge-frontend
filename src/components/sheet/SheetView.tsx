@@ -145,7 +145,7 @@ export default function SheetView({ slug }: { slug: string }) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-[#3A3A36]">Loading…</p>
+        <p className="text-[rgba(255,255,255,.25)]">Loading…</p>
       </div>
     );
   }
@@ -153,10 +153,10 @@ export default function SheetView({ slug }: { slug: string }) {
   if (error || !sheet) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center">
-        <p className="text-lg text-[#7C7C78]">{error || 'Sheet not found.'}</p>
+        <p className="text-lg text-[#9898A6]">{error || 'Sheet not found.'}</p>
         <Link
           href="/#sheets"
-          className="text-sm text-[#C9A84C] transition-opacity hover:opacity-80"
+          className="text-sm text-[#FFB84D] transition-opacity hover:opacity-80"
           style={{ marginTop: '1.5rem' }}
         >
           &larr; Back to sheets
@@ -193,27 +193,27 @@ export default function SheetView({ slug }: { slug: string }) {
         <div className="min-w-0">
           <Link
             href="/#sheets"
-            className="text-[13px] font-light text-[#5A5A56] transition-colors hover:text-[#C9A84C]"
+            className="text-[13px] font-light text-[#7A7A88] transition-colors hover:text-[#FFB84D]"
           >
             &larr; All sheets
           </Link>
 
           <h1
-            className="font-heading text-[2.25rem] font-bold tracking-[-0.02em] text-[#F2F0EA] sm:text-[2.75rem]"
+            className="font-heading text-[2.25rem] font-bold tracking-[-0.02em] text-[#F4F4F7] sm:text-[2.75rem]"
             style={{ marginTop: '1.75rem' }}
           >
             {sheet.name}
           </h1>
 
           <p
-            className="max-w-xl text-[15px] font-light leading-[1.75] text-[#7C7C78]"
+            className="max-w-xl text-[15px] font-light leading-[1.75] text-[#9898A6]"
             style={{ marginTop: '0.85rem' }}
           >
             {sheet.description}
           </p>
 
           <div
-            className="flex flex-wrap items-center gap-1.5 border-t border-[#141414]"
+            className="flex flex-wrap items-center gap-1.5 border-t border-[rgba(255,255,255,.07)]"
             style={{ marginTop: '2.5rem', paddingTop: '1.75rem' }}
           >
             {filters.map((f) => (
@@ -222,8 +222,8 @@ export default function SheetView({ slug }: { slug: string }) {
                 onClick={() => setFilter(f.key)}
                 className={`rounded-[6px] text-[13px] font-medium transition-colors ${
                   filter === f.key
-                    ? 'bg-[#1A1A1A] text-[#F2F0EA]'
-                    : 'text-[#5A5A56] hover:text-[#7C7C78]'
+                    ? 'bg-[rgba(255,255,255,.08)] text-[#F4F4F7]'
+                    : 'text-[#7A7A88] hover:text-[#9898A6]'
                 }`}
                 style={{ padding: '0.45rem 0.9rem' }}
               >
@@ -236,8 +236,8 @@ export default function SheetView({ slug }: { slug: string }) {
                 onClick={() => setFilter(filter === 'REVISION' ? 'ALL' : 'REVISION')}
                 className={`flex items-center gap-1.5 rounded-[6px] text-[13px] font-medium transition-colors ${
                   filter === 'REVISION'
-                    ? 'bg-[#1A1A1A] text-[#C9A84C]'
-                    : 'text-[#5A5A56] hover:text-[#7C7C78]'
+                    ? 'bg-[rgba(255,184,77,.14)] text-[#FFB84D]'
+                    : 'text-[#7A7A88] hover:text-[#9898A6]'
                 }`}
                 style={{ padding: '0.45rem 0.9rem', marginLeft: '0.5rem' }}
               >
@@ -269,26 +269,26 @@ export default function SheetView({ slug }: { slug: string }) {
 
           {sheet.topics.length === 0 && (
             <div
-              className="rounded-[8px] border border-[#1A1A1A] text-center"
+              className="rounded-[14px] border border-[rgba(255,255,255,.07)] text-center"
               style={{ marginTop: '2rem', padding: '4rem 2rem' }}
             >
-              <p className="text-[#5A5A56]">No problems in this sheet yet.</p>
+              <p className="text-[#7A7A88]">No problems in this sheet yet.</p>
             </div>
           )}
 
           {sheet.topics.length > 0 && visibleCount === 0 && (
             <div
-              className="rounded-[8px] border border-[#1A1A1A] text-center"
+              className="rounded-[14px] border border-[rgba(255,255,255,.07)] text-center"
               style={{ marginTop: '2rem', padding: '4rem 2rem' }}
             >
-              <p className="text-[#5A5A56]">
+              <p className="text-[#7A7A88]">
                 {filter === 'REVISION'
                   ? 'Nothing marked for revision.'
                   : 'No problems match this filter.'}
               </p>
               <button
                 onClick={() => setFilter('ALL')}
-                className="text-[13px] text-[#C9A84C] transition-opacity hover:opacity-80"
+                className="text-[13px] text-[#FFB84D] transition-opacity hover:opacity-80"
                 style={{ marginTop: '1rem' }}
               >
                 Show all
@@ -300,16 +300,29 @@ export default function SheetView({ slug }: { slug: string }) {
         <aside className="w-full lg:sticky lg:top-28">
           {loggedIn ? (
             <div
-              className="flex flex-col items-center rounded-[10px] border border-[#161616] bg-[#0A0A0A]"
-              style={{ padding: '2.25rem 1.75rem' }}
+              className="flex flex-col items-center rounded-[16px] border"
+              style={{
+                padding: '2.25rem 1.75rem',
+                borderColor: 'rgba(255,255,255,.08)',
+                background: 'rgba(255,255,255,.035)',
+                backdropFilter: 'blur(26px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(26px) saturate(150%)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08), 0 10px 36px rgba(0,0,0,.3)',
+              }}
             >
               <div className="relative h-[132px] w-[132px]">
                 <svg width="132" height="132" viewBox="0 0 132 132" className="-rotate-90">
-                  <circle cx="66" cy="66" r="52" fill="none" stroke="#1A1A1A" strokeWidth="8" />
+                  <defs>
+                    <linearGradient id="nfWheel" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#FFB84D" />
+                      <stop offset="100%" stopColor="#9B8CFF" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="66" cy="66" r="52" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="8" />
                   <circle
                     cx="66" cy="66" r="52"
                     fill="none"
-                    stroke="#C9A84C"
+                    stroke="url(#nfWheel)"
                     strokeWidth="8"
                     strokeLinecap="round"
                     strokeDasharray={circ}
@@ -317,20 +330,20 @@ export default function SheetView({ slug }: { slug: string }) {
                     style={{ transition: 'stroke-dashoffset .6s ease' }}
                   />
                 </svg>
-                <span className="absolute inset-0 flex items-center justify-center font-heading text-[1.75rem] font-bold tabular-nums text-[#C9A84C]">
+                <span className="absolute inset-0 flex items-center justify-center font-heading text-[1.75rem] font-bold tabular-nums text-[#FFB84D]">
                   {pct}%
                 </span>
               </div>
 
               <p
-                className="font-heading text-[1.5rem] font-bold leading-none tabular-nums text-[#F2F0EA]"
+                className="font-heading text-[1.5rem] font-bold leading-none tabular-nums text-[#F4F4F7]"
                 style={{ marginTop: '1.5rem' }}
               >
                 {counts.solved}
-                <span className="font-normal text-[#3A3A36]"> / {counts.total}</span>
+                <span className="font-normal text-[rgba(255,255,255,.25)]"> / {counts.total}</span>
               </p>
               <p
-                className="text-[10px] uppercase tracking-[0.22em] text-[#5A5A56]"
+                className="text-[10px] uppercase tracking-[0.22em] text-[#7A7A88]"
                 style={{ marginTop: '0.6rem' }}
               >
                 Forged
@@ -338,11 +351,11 @@ export default function SheetView({ slug }: { slug: string }) {
 
               {counts.revision > 0 && (
                 <div
-                  className="flex w-full items-center justify-between border-t border-[#161616]"
+                  className="flex w-full items-center justify-between border-t border-[rgba(255,255,255,.07)]"
                   style={{ marginTop: '1.75rem', paddingTop: '1.25rem' }}
                 >
-                  <span className="text-[12px] text-[#5A5A56]">Marked for revision</span>
-                  <span className="text-[13px] tabular-nums text-[#C9A84C]">
+                  <span className="text-[12px] text-[#7A7A88]">Marked for revision</span>
+                  <span className="text-[13px] tabular-nums text-[#FFB84D]">
                     {counts.revision}
                   </span>
                 </div>
@@ -350,11 +363,17 @@ export default function SheetView({ slug }: { slug: string }) {
             </div>
           ) : (
             <div
-              className="rounded-[10px] border border-[#161616] bg-[#0A0A0A] text-center"
-              style={{ padding: '2rem 1.75rem' }}
+              className="rounded-[16px] border text-center"
+              style={{
+                padding: '2rem 1.75rem',
+                borderColor: 'rgba(255,255,255,.08)',
+                background: 'rgba(255,255,255,.035)',
+                backdropFilter: 'blur(26px) saturate(150%)',
+                WebkitBackdropFilter: 'blur(26px) saturate(150%)',
+              }}
             >
-              <p className="text-[14px] font-light leading-[1.7] text-[#7C7C78]">
-                <Link href="/login" className="text-[#C9A84C] hover:opacity-80">Sign in</Link>
+              <p className="text-[14px] font-light leading-[1.7] text-[#9898A6]">
+                <Link href="/login" className="text-[#FFB84D] hover:opacity-80">Sign in</Link>
                 {' '}to track progress, mark problems for revision, and keep notes.
               </p>
             </div>

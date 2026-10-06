@@ -1,5 +1,6 @@
 import Navbar from '@/components/navbar/Navbar';
 import SheetView from '@/components/sheet/SheetView';
+import GlassBackdrop from '@/components/sheet/GlassBackdrop';
 
 export default async function SheetPage({
   params,
@@ -9,7 +10,8 @@ export default async function SheetPage({
   const { slug } = await params;
 
   return (
-    <main className="relative min-h-screen bg-[#070707]">
+    <main className="relative min-h-screen" style={{ backgroundColor: '#0D0F14' }}>
+      <GlassBackdrop />
       <Navbar />
       <SheetView slug={slug} />
     </main>
