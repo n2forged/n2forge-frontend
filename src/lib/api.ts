@@ -259,3 +259,58 @@ export const deleteProblem = async (problemId: string, token: string) => {
   });
   if (!res.ok) throw await res.json();
 };
+
+// ── Admin: problem editing ──
+
+export const updateProblem = async (
+  problemId: string,
+  data: { name?: string; slug?: string; difficulty?: string },
+  token: string
+) => {
+  const res = await fetch(`${API_BASE_URL}/api/v1/problems/${problemId}`, {
+    method: 'PUT',
+    headers: getHeaders(token),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw await res.json();
+  return res.json();
+};
+
+export const removeProblemLink = async (linkId: string, token: string) => {
+  const res = await fetch(`${API_BASE_URL}/api/v1/problems/links/${linkId}`, {
+    method: 'DELETE',
+    headers: getHeaders(token),
+  });
+  if (!res.ok) throw await res.json();
+};
+
+// ── Admin: sheet composition ──
+
+export const removeProblemFromSheet = async (
+  sheetId: string,
+  problemId: string,
+  token: string
+) => {
+  const res = await fetch(
+    `${API_BASE_URL}/api/v1/sheets/${sheetId}/problems/${problemId}`,
+    { method: 'DELETE', headers: getHeaders(token) }
+  );
+  if (!res.ok) throw await res.json();
+};
+
+export const reorderSheetProblems = async (
+  sheetId: string,
+  topicId: string,
+  problemIds: string[],
+  token: string
+) => {
+  const res = await fetch(
+    `${API_BASE_URL}/api/v1/sheets/${sheetId}/topics/${topicId}/reorder`,
+    {
+      method: 'PUT',
+      headers: getHeaders(token),
+      body: JSON.stringify({ problemIds }),
+    }
+  );
+  if (!res.ok) throw await res.json();
+};

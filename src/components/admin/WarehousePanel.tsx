@@ -8,6 +8,8 @@ import {
 } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 import { WarehouseProblem, Sheet, Topic } from '@/types';
+import EditProblemModal from './EditProblemModal';
+import LinksModal from './LinksModal';
 
 const DIFF_COLOR: Record<string, string> = {
   EASY: '#3F8A55',
@@ -33,6 +35,8 @@ export default function WarehousePanel() {
   const [targetTopic, setTargetTopic] = useState('');
   const [tagTopic, setTagTopic] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [editing, setEditing] = useState<WarehouseProblem | null>(null);
+  const [linking, setLinking] = useState<WarehouseProblem | null>(null);
 
   const refresh = useCallback(async () => {
     const token = getToken();
@@ -400,6 +404,23 @@ export default function WarehousePanel() {
               )}
             </div>
 
+            <span className="flex shrink-0 items-center gap-1.5">
+              <button
+                onClick={() => setEditing(p)}
+                className="rounded-[3px] border border-[#2A2A2A] text-[11px] text-[#7C7C78] transition-colors hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                style={{ padding: '0.3rem 0.6rem' }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => setLinking(p)}
+                className="rounded-[3px] border border-[#2A2A2A] text-[11px] text-[#7C7C78] transition-colors hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                style={{ padding: '0.3rem 0.6rem' }}
+              >
+                Links{p.links && p.links.length > 0 ? ' (' + p.links.length + ')' : ''}
+              </button>
+            </span>
+
             <span
               className="w-[62px] shrink-0 text-right text-[10px] font-medium uppercase tracking-[0.14em]"
               style={{ color: DIFF_COLOR[p.difficulty] ?? '#5A5A56' }}
@@ -456,6 +477,21 @@ export default function WarehousePanel() {
             </div>
           </div>
         </div>
+      )}
+      {editing && (
+        <EditProblemModal
+          problem={editing}
+          onClose={() => setEditing(null)}
+          onSaved={refresh}
+        />
+      )}
+
+      {linking && (
+        <LinksModal
+          problem={linking}
+          onClose={() => setLinking(null)}
+          onChanged={refresh}
+        />
       )}
     </div>
   );

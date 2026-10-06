@@ -6,11 +6,12 @@ import { useSession } from '@/lib/useSession';
 import WarehousePanel from './WarehousePanel';
 import CreatePanel from './CreatePanel';
 import BulkImportPanel from './BulkImportPanel';
+import SheetBuilderPanel from './SheetBuilderPanel';
 
 export default function AdminView() {
   const { user, ready } = useSession();
   const router = useRouter();
-  const [tab, setTab] = useState<'warehouse' | 'create' | 'bulk'>('warehouse');
+  const [tab, setTab] = useState<'warehouse' | 'builder' | 'create' | 'bulk'>('warehouse');
 
   useEffect(() => {
     if (!ready) return;
@@ -29,6 +30,7 @@ export default function AdminView() {
 
   const tabs = [
     ['warehouse', 'Warehouse'],
+    ['builder', 'Sheet builder'],
     ['create', 'Create'],
     ['bulk', 'Bulk import'],
   ] as const;
@@ -71,6 +73,7 @@ export default function AdminView() {
 
       <div style={{ marginTop: '2.5rem' }}>
         {tab === 'warehouse' && <WarehousePanel />}
+        {tab === 'builder' && <SheetBuilderPanel />}
         {tab === 'create' && <CreatePanel />}
         {tab === 'bulk' && <BulkImportPanel />}
       </div>

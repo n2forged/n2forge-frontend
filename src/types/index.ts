@@ -131,12 +131,19 @@ export interface TopicTag {
   slug: string;
 }
 
+export interface WarehouseLink {
+  id: string;
+  platform: string;
+  url: string;
+  isPrimary: boolean;
+}
+
 export interface WarehouseProblem {
   id: string;
   name: string;
   slug: string;
   difficulty: Difficulty;
   topics: TopicTag[];
-  links: ProblemLinkDto[];
+  links: WarehouseLink[];
   createdAt: string;
 }
