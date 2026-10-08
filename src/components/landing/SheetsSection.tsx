@@ -1,141 +1,131 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 const SHEETS = [
-  {
-    name: 'The Anvil',
-    sub: 'Complete DSA Foundation',
-    slug: 'complete-dsa',
-    count: 450,
-    split: { easy: 38, medium: 44, hard: 18 },
-    desc: 'Every core topic from arrays to graphs, sequenced so each problem earns the next.',
-  },
-  {
-    name: 'The Blueprint',
-    sub: 'SDE Interview Sheet',
-    slug: 'sde-sheet',
-    count: 191,
-    split: { easy: 26, medium: 52, hard: 22 },
-    desc: 'The interview-ready set. Tight, high-signal, built for the weeks before a loop.',
-  },
-  {
-    name: 'Tempered Steel',
-    sub: 'Product-Based Companies',
-    slug: 'product-based',
-    count: 250,
-    split: { easy: 18, medium: 48, hard: 34 },
-    desc: 'Problems that actually show up at product companies. Harder, deeper, unforgiving.',
-  },
-  {
-    name: 'First Strike',
-    sub: 'Service-Based Companies',
-    slug: 'service-based',
-    count: 180,
-    split: { easy: 52, medium: 38, hard: 10 },
-    desc: 'Fundamentals-heavy and output-focused — exactly what service company rounds test.',
-  },
+  { name: 'Complete DSA', slug: 'complete-dsa', live: true,
+    desc: 'Every core topic from arrays to graphs, sequenced so each problem earns the next.' },
+  { name: 'SDE Sheet', slug: 'sde-sheet', live: true,
+    desc: 'Tight, high-signal, built for the weeks before a loop.' },
+  { name: 'Blind 75', slug: 'blind-75', live: false,
+    desc: 'The list everyone starts from, with our ordering and explanations on top.' },
+  { name: 'Handpicked 100', slug: 'handpicked-100', live: false,
+    desc: 'A hundred problems we keep returning to, chosen for what each one teaches.' },
 ];
 
 export default function SheetsSection() {
+  const railRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const rail = railRef.current;
+      const track = trackRef.current;
+      const bar = barRef.current;
+      if (!rail || !track) return;
+
+      if (window.innerWidth < 768) {
+        track.style.transform = '';
+        if (bar) bar.style.width = '0%';
+        return;
+      }
+
+      const total = rail.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const p = Math.min(1, Math.max(0, -rail.getBoundingClientRect().top / total));
+      const travel = Math.max(0, track.scrollWidth - window.innerWidth + 40);
+      track.style.transform = `translateX(${(-p * travel).toFixed(1)}px)`;
+      if (bar) bar.style.width = `${(p * 100).toFixed(1)}%`;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
   return (
-    <section
-      id="sheets"
-      className="relative z-10 border-t border-[#141414]"
-      style={{ paddingLeft: '7vw', paddingRight: '7vw', paddingTop: '9rem', paddingBottom: '9rem' }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-      >
-        <div style={{ marginBottom: '1.75rem' }} className="flex items-center gap-3">
-          <span className="h-px w-10 bg-[#C9A84C]" />
-          <span className="text-xs font-medium uppercase tracking-[0.28em] text-[#C9A84C]">
-            The Sheets
-          </span>
+    <section ref={railRef} id="sheets" className="relative z-10 md:h-[330vh]">
+      <div className="relative flex items-center overflow-hidden py-24 md:sticky md:top-0 md:h-screen md:py-0">
+        <div
+          className="absolute inset-x-0 hidden md:block"
+          style={{ top: 'clamp(90px,13vh,130px)', paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)' }}
+        >
+          <div className="mx-auto max-w-[1240px]">
+            <h2
+              className="font-extralight tracking-[-0.035em] text-[#F5F5F0]"
+              style={{ fontSize: 'clamp(1.8rem,4vw,2.6rem)' }}
+            >
+              Four tracks. One philosophy.
+            </h2>
+          </div>
         </div>
 
-        <h2 className="max-w-3xl font-heading text-[2.25rem] font-bold leading-[1.15] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.4rem]">
-          <span className="text-[#F2F0EA]">Pick your </span>
-          <span className="text-[#C9A84C]">blueprint.</span>
-        </h2>
+        <div className="w-full md:hidden" style={{ paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)', marginBottom: '2.5rem' }}>
+          <h2 className="font-extralight tracking-[-0.035em] text-[#F5F5F0]" style={{ fontSize: 'clamp(1.8rem,6vw,2.4rem)' }}>
+            Four tracks. One philosophy.
+          </h2>
+        </div>
 
-        <p
-          className="max-w-xl text-lg font-light leading-[1.85] text-[#7C7C78]"
-          style={{ marginTop: '1.75rem' }}
+        <div
+          ref={trackRef}
+          className="flex w-full flex-col gap-5 md:w-auto md:flex-row md:gap-[26px]"
+          style={{ paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)', willChange: 'transform' }}
         >
-          Four curated tracks. Same philosophy, different destination.
-        </p>
-      </motion.div>
-
-      <div
-        className="grid grid-cols-1 md:grid-cols-2"
-        style={{ marginTop: '4.5rem', gap: '1.5rem' }}
-      >
-        {SHEETS.map((s, i) => (
-          <motion.div
-            key={s.slug}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: (i % 2) * 0.1 }}
-          >
-            <Link
-              href={`/sheet/${s.slug}`}
-              className="group flex h-full flex-col rounded-[6px] border border-[#1A1A1A] bg-[#0B0B0B] transition-all duration-300 hover:border-[#3A3120] hover:bg-[#0E0E0E]"
-              style={{ padding: '2.75rem 2.5rem' }}
-            >
-              <div className="flex items-start justify-between gap-6">
-                <div className="min-w-0">
-                  <h3 className="font-heading text-2xl font-bold tracking-tight text-[#F2F0EA] transition-colors group-hover:text-[#C9A84C]">
-                    {s.name}
-                  </h3>
-                  <p
-                    className="text-[12px] uppercase tracking-[0.18em] text-[#7C7C78]"
-                    style={{ marginTop: '0.6rem' }}
-                  >
-                    {s.sub}
-                  </p>
-                </div>
-                <span className="shrink-0 font-heading text-[2rem] font-bold leading-none text-[#C9A84C]">
-                  {s.count}
-                </span>
-              </div>
-
-              <p
-                className="text-[15px] font-light leading-[1.75] text-[#7C7C78]"
-                style={{ marginTop: '1.75rem' }}
-              >
-                {s.desc}
-              </p>
-
-              <div className="mt-auto" style={{ paddingTop: '2.5rem' }}>
-                <div className="flex h-[3px] w-full overflow-hidden rounded-full">
-                  <span style={{ width: `${s.split.easy}%` }} className="bg-[#3F8A55]" />
-                  <span style={{ width: `${s.split.medium}%` }} className="bg-[#C9A84C]" />
-                  <span style={{ width: `${s.split.hard}%` }} className="bg-[#9E4B3F]" />
-                </div>
-
-                <div
-                  className="flex items-center justify-between gap-4"
-                  style={{ marginTop: '1.25rem' }}
+          {SHEETS.map((s) => {
+            const inner = (
+              <>
+                <h3 className="font-light tracking-[-0.025em] text-[#F5F5F0]" style={{ fontSize: '1.7rem' }}>
+                  {s.name}
+                </h3>
+                <p className="text-[0.92rem] leading-[1.75] text-[#A7ADBB]" style={{ marginTop: '0.75rem' }}>
+                  {s.desc}
+                </p>
+                <span
+                  className={`text-[0.84rem] ${s.live ? 'text-[#71E6E1]' : 'text-[#E8B95B]'}`}
+                  style={{ marginTop: '1.4rem', display: 'block' }}
                 >
-                  <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.14em] text-[#5A5A56]">
-                    <span>{s.split.easy}% Easy</span>
-                    <span>{s.split.medium}% Med</span>
-                    <span>{s.split.hard}% Hard</span>
-                  </div>
-                  <span className="shrink-0 font-heading text-sm font-medium text-[#7C7C78] transition-colors group-hover:text-[#C9A84C]">
-                    Start &rarr;
-                  </span>
-                </div>
+                  {s.live ? 'Open' : 'In the forge'}
+                </span>
+              </>
+            );
+
+            const cls =
+              'flex flex-col justify-end rounded-[22px] border border-white/10 md:h-[min(54vh,420px)] md:flex-[0_0_min(78vw,400px)]';
+            const st = {
+              padding: '34px 32px',
+              background: 'linear-gradient(170deg,rgba(255,255,255,.05),rgba(255,255,255,.012))',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            } as const;
+
+            return s.live ? (
+              <Link key={s.slug} href={`/sheet/${s.slug}`} className={`${cls} transition-colors hover:border-[#9B8CFF]/40`} style={st}>
+                {inner}
+              </Link>
+            ) : (
+              <div key={s.slug} className={cls} style={{ ...st, opacity: 0.5 }}>
+                {inner}
               </div>
-            </Link>
-          </motion.div>
-        ))}
+            );
+          })}
+        </div>
+
+        <div
+          className="absolute hidden h-[2px] rounded-full bg-white/[.06] md:block"
+          style={{ bottom: '52px', left: 'clamp(22px,5vw,64px)', right: 'clamp(22px,5vw,64px)' }}
+        >
+          <span
+            ref={barRef}
+            className="block h-full rounded-full"
+            style={{ width: 0, background: 'linear-gradient(90deg,#71E6E1,#9B8CFF)' }}
+          />
+        </div>
       </div>
     </section>
   );

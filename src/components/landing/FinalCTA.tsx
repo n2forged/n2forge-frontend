@@ -2,50 +2,62 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import LogoAnimation from './LogoAnimation';
 
 export default function FinalCTA() {
   return (
     <section
-      className="relative z-10 border-t border-[#141414]"
-      style={{ paddingLeft: '7vw', paddingRight: '7vw', paddingTop: '11rem', paddingBottom: '11rem' }}
+      className="relative z-10 flex min-h-screen flex-col items-center justify-center text-center"
+      style={{
+        paddingLeft: 'clamp(22px,5vw,64px)',
+        paddingRight: 'clamp(22px,5vw,64px)',
+        paddingTop: '7rem',
+        paddingBottom: '7rem',
+      }}
     >
+      <div className="w-full max-w-[290px]">
+        <LogoAnimation width={290} />
+      </div>
+
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-        className="flex flex-col items-center text-center"
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+        className="flex flex-col items-center"
       >
-        <h2 className="max-w-3xl font-heading text-[2.25rem] font-bold leading-[1.14] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.6rem]">
-          <span className="text-[#F2F0EA]">Stop collecting problems.</span>
-          <br />
-          <span className="text-[#C9A84C]">Start building intuition.</span>
+        <h2
+          className="font-extralight tracking-[-0.035em] text-[#F5F5F0]"
+          style={{ marginTop: '2.5rem', fontSize: 'clamp(2rem,4.8vw,3.2rem)', lineHeight: 1.12 }}
+        >
+          Start where it actually starts.
         </h2>
 
         <p
-          className="max-w-lg text-lg font-light leading-[1.8] text-[#7C7C78]"
-          style={{ marginTop: '2rem' }}
+          className="text-[#A7ADBB]"
+          style={{ marginTop: '1.4rem', maxWidth: '44ch', lineHeight: 1.85 }}
         >
-          Free, forever. No paywalls, no drip content, no upsell.
+          Free, no trial, no card. Open the first sheet and work the first problem.
         </p>
 
-        <div
-          className="flex flex-wrap items-center justify-center gap-4"
-          style={{ marginTop: '3rem' }}
-        >
+        <div className="flex flex-wrap items-center justify-center gap-3" style={{ marginTop: '2.4rem' }}>
           <Link
             href="/register"
-            className="rounded-[4px] bg-[#C9A84C] font-heading text-base font-semibold tracking-wide text-[#070707] transition-all duration-300 hover:bg-[#E3C97A]"
-            style={{ padding: '18px 40px' }}
+            className="rounded-[12px] text-[15px] font-medium text-[#0A0C11] transition-transform duration-300 hover:-translate-y-0.5"
+            style={{
+              padding: '15px 30px',
+              background: 'linear-gradient(170deg,#F7F7F3,#CFD4E0)',
+              boxShadow: '0 10px 30px rgba(190,200,225,.12)',
+            }}
           >
-            Start Forging &rarr;
+            Create an account
           </Link>
           <Link
             href="#sheets"
-            className="rounded-[4px] border border-[#2A2A2A] font-heading text-base font-medium tracking-wide text-[#F2F0EA] transition-all duration-300 hover:border-[#C9A84C] hover:text-[#C9A84C]"
-            style={{ padding: '18px 40px' }}
+            className="rounded-[12px] border border-white/10 text-[15px] text-[#F5F5F0] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#9B8CFF]/45"
+            style={{ padding: '15px 30px', background: 'rgba(255,255,255,.04)' }}
           >
-            Browse Sheets
+            Browse the sheets
           </Link>
         </div>
       </motion.div>

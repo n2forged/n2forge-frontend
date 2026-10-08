@@ -1,7 +1,8 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @theme {
+  /* legacy — sheet, admin and profile still reference these */
   --color-ink: #070707;
   --color-surface: #0F0F0F;
   --color-line: #1E1E1E;
@@ -10,8 +11,20 @@
   --color-bone: #F2F0EA;
   --color-ash: #7C7C78;
 
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-sans: 'Inter', sans-serif;
+  /* revamp palette */
+  --color-base: #0B0D12;
+  --color-raise: #111722;
+  --color-ivory: #F5F5F0;
+  --color-mist: #A7ADBB;
+  --color-slate: #6E7585;
+  --color-violet: #9B8CFF;
+  --color-aqua: #71E6E1;
+  --color-azure: #7AA7FF;
+  --color-brass: #E8B95B;
+
+  --font-heading: 'Sora', sans-serif;
+  --font-sans: 'Sora', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -21,15 +34,18 @@ html, body { background-color: #070707; }
 
 body {
   color: #F2F0EA;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Sora', sans-serif; }
+
+:focus-visible { outline: 2px solid #71E6E1; outline-offset: 3px; border-radius: 6px; }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #070707; }
-::-webkit-scrollbar-thumb { background: #1E1E1E; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #232833; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #E8B95B; }
 
-::selection { background: rgba(201,168,76,.25); color: #F2F0EA; }
+::selection { background: rgba(155,140,255,.28); color: #F5F5F0; }
