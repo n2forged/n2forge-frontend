@@ -11,8 +11,8 @@ export default function HeroSection() {
       style={{
         paddingLeft: 'clamp(22px,5vw,64px)',
         paddingRight: 'clamp(22px,5vw,64px)',
-        paddingTop: '9.5rem',
-        paddingBottom: '5rem',
+        paddingTop: '8.5rem',
+        paddingBottom: '3.5rem',
       }}
     >
       <div className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] lg:gap-16">

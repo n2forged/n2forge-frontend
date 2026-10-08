@@ -17,8 +17,8 @@ export default function ApproachSection() {
       style={{
         paddingLeft: 'clamp(22px,5vw,64px)',
         paddingRight: 'clamp(22px,5vw,64px)',
-        paddingTop: 'clamp(90px,13vw,150px)',
-        paddingBottom: 'clamp(90px,13vw,150px)',
+        paddingTop: 'clamp(64px,8vw,104px)',
+        paddingBottom: 'clamp(64px,8vw,104px)',
       }}
     >
       <div className="mx-auto max-w-[1240px]">
@@ -27,17 +27,18 @@ export default function ApproachSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          className="grid grid-cols-1 items-end gap-9 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20"
         >
           <h2
             className="font-extralight tracking-[-0.03em] text-[#F5F5F0]"
-            style={{ fontSize: 'clamp(1.7rem,3.9vw,2.8rem)', lineHeight: 1.3, maxWidth: '19ch' }}
+            style={{ fontSize: 'clamp(1.7rem,3.9vw,2.8rem)', lineHeight: 1.3, maxWidth: '16ch' }}
           >
             Most sheets hand you a list. A list is not a path.
           </h2>
 
           <p
             className="text-[#A7ADBB]"
-            style={{ marginTop: '1.75rem', maxWidth: '52ch', fontSize: '1.02rem', lineHeight: 1.9 }}
+            style={{ maxWidth: '46ch', fontSize: '1.02rem', lineHeight: 1.9 }}
           >
             Two hundred problems in arbitrary order teaches you two hundred tricks
             and no instinct. We order them so each one leans on the last, and we
@@ -45,7 +46,7 @@ export default function ApproachSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ marginTop: '4.5rem' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style={{ marginTop: '3.25rem' }}>
           {STEPS.map((s, i) => (
             <motion.div
               key={s.n}

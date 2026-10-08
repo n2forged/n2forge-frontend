@@ -8,7 +8,7 @@ import Footer from '@/components/footer/Footer';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden" style={{ background: '#0B0D12' }}>
+    <main className="relative min-h-screen overflow-x-clip" style={{ background: '#0B0D12' }}>
       <Atmosphere />
       <Navbar />
       <div className="relative z-10">

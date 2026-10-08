@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <nav className="fixed inset-x-0 top-0 z-50">
       <div
-        className="mx-auto flex max-w-[1240px] items-center gap-8 rounded-[16px] border border-white/10"
+        className="mx-auto flex max-w-[1240px] items-center justify-between gap-8 rounded-[16px] border border-white/10"
         style={{
           marginTop: '14px',
           marginLeft: 'clamp(22px,5vw,64px)',
@@ -54,7 +54,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="ml-auto hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           <Link
             href="/#sheets"
             className="text-sm text-[#A7ADBB] transition-colors hover:text-[#F5F5F0]"
@@ -75,7 +75,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="ml-auto flex items-center gap-3 md:ml-0">
+        <div className="flex items-center gap-3">
           {!ready ? (
             <span className="h-[38px] w-[92px]" />
           ) : user ? (

@@ -7,12 +7,12 @@ import LogoAnimation from './LogoAnimation';
 export default function FinalCTA() {
   return (
     <section
-      className="relative z-10 flex min-h-screen flex-col items-center justify-center text-center"
+      className="relative z-10 flex flex-col items-center justify-center text-center"
       style={{
         paddingLeft: 'clamp(22px,5vw,64px)',
         paddingRight: 'clamp(22px,5vw,64px)',
-        paddingTop: '7rem',
-        paddingBottom: '7rem',
+        paddingTop: 'clamp(80px,10vw,130px)',
+        paddingBottom: 'clamp(80px,10vw,130px)',
       }}
     >
       <div className="w-full max-w-[290px]">

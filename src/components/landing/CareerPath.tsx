@@ -111,12 +111,12 @@ export default function CareerPath() {
               >
                 <span className="flex items-center gap-3 lg:flex-col lg:gap-[9px]">
                   <span
-                    className="-ml-[34px] block h-[15px] w-[15px] shrink-0 rounded-full border-2 transition-transform duration-300 group-hover:scale-[1.32] group-focus-visible:scale-[1.32] lg:ml-0"
+                    className="relative -ml-[34px] block h-[15px] w-[15px] shrink-0 rounded-full border-2 transition-transform duration-300 group-hover:scale-[1.32] group-focus-visible:scale-[1.32] lg:ml-0"
                     style={DOT[s.dot]}
                   >
                     {s.dot === 'start' && (
                       <>
-                        <span className="absolute inset-[3px] block rounded-full bg-[#E8B95B] lg:inset-auto" style={{ position: 'absolute', left: 3, top: 3, right: 3, bottom: 3 }} />
+                        <span className="absolute rounded-full bg-[#E8B95B]" style={{ left: 2.5, top: 2.5, right: 2.5, bottom: 2.5 }} />
                         <motion.span
                           className="absolute rounded-full border border-[#E8B95B]/45"
                           style={{ inset: -9 }}
