@@ -53,7 +53,7 @@ export default function FinalCTA() {
             Create an account
           </Link>
           <Link
-            href="#sheets"
+            href="/sheets"
             className="rounded-[12px] border border-white/10 text-[15px] text-[#F5F5F0] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#9B8CFF]/45"
             style={{ padding: '15px 30px', background: 'rgba(255,255,255,.04)' }}
           >

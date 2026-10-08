@@ -33,7 +33,7 @@ const STOPS: Stop[] = [
     body: 'Tighter, harder, built for the weeks before a loop. Nothing here is new material — it is the same patterns under time pressure, which is the only thing an interview actually measures.',
   },
   {
-    left: '72%', top: '35%', cap: 'Mock interviews', dot: 'ahead', dir: 'down', align: 'mid',
+    left: '72%', top: '35%', cap: 'Mock interviews', dot: 'ahead', dir: 'down', align: 'end',
     step: 'STOP 04', tag: 'soon', tagText: 'In the forge',
     title: 'Mock interviews',
     body: 'Timed rounds with someone watching, scored on how you reason out loud, how you take a hint, and what you do when the first approach breaks. The part nobody practises and everybody is judged on.',
@@ -134,20 +134,21 @@ export default function CareerPath() {
                 <span
                   className={[
                     open === i ? 'block' : 'hidden',
-                    'mt-3 w-full rounded-[16px] border border-white/10 lg:mt-0 lg:block lg:absolute lg:w-[300px]',
+                    'mt-3 w-full rounded-[16px] border border-white/10 lg:mt-0 lg:block lg:absolute lg:w-[290px]',
                     'lg:invisible lg:opacity-0 lg:transition-all lg:duration-300',
                     'lg:group-hover:visible lg:group-hover:opacity-100 lg:group-focus-visible:visible lg:group-focus-visible:opacity-100',
                     s.dir === 'up' ? 'lg:bottom-[calc(100%+10px)]' : 'lg:top-[calc(100%+10px)]',
-                    s.align === 'mid' ? 'lg:left-1/2 lg:-ml-[150px]' : '',
+                    s.align === 'mid' ? 'lg:left-1/2 lg:-ml-[145px]' : '',
                     s.align === 'start' ? 'lg:left-[-6px]' : '',
                     s.align === 'end' ? 'lg:right-[-6px]' : '',
                   ].join(' ')}
                   style={{
                     padding: '20px 22px',
-                    background: 'linear-gradient(170deg,rgba(23,30,43,.94),rgba(14,19,28,.94))',
-                    backdropFilter: 'blur(26px)',
-                    WebkitBackdropFilter: 'blur(26px)',
-                    boxShadow: '0 1px 0 rgba(255,255,255,.09) inset, 0 28px 70px rgba(0,0,0,.6)',
+                    background: 'linear-gradient(162deg,rgba(28,36,53,.985),rgba(13,18,27,.99))',
+                    backdropFilter: 'blur(44px) saturate(175%)',
+                    WebkitBackdropFilter: 'blur(44px) saturate(175%)',
+                    boxShadow:
+                      '0 1px 0 rgba(255,255,255,.16) inset, 0 0 0 1px rgba(255,255,255,.035) inset, 0 -1px 0 rgba(0,0,0,.4) inset, 0 36px 84px rgba(0,0,0,.72)',
                   }}
                 >
                   <span className="flex flex-wrap items-center gap-[10px]">

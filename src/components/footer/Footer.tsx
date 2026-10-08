@@ -4,6 +4,7 @@ const COLUMNS = [
   {
     heading: 'Sheets',
     links: [
+      ['All sheets', '/sheets'],
       ['Complete DSA', '/sheet/complete-dsa'],
       ['SDE Sheet', '/sheet/sde-sheet'],
     ],

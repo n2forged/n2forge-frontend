@@ -14,6 +14,8 @@ const SHEETS = [
     desc: 'A hundred problems we keep returning to, chosen for what each one teaches.' },
 ];
 
+const GUT = 'clamp(22px,5vw,64px)';
+
 export default function SheetsSection() {
   const railRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -50,45 +52,39 @@ export default function SheetsSection() {
   }, []);
 
   return (
-    <section ref={railRef} id="sheets" className="relative z-10 md:h-[330vh]">
-      <div className="relative flex items-center overflow-hidden py-24 md:sticky md:top-0 md:h-screen md:py-0">
-        <div
-          className="absolute inset-x-0 hidden md:block"
-          style={{ top: 'clamp(90px,13vh,130px)', paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)' }}
-        >
+    <section ref={railRef} id="sheets" className="relative z-10 md:h-[300vh]">
+      <div className="flex flex-col justify-center overflow-hidden py-16 md:sticky md:top-0 md:h-screen md:py-0">
+        <div style={{ paddingLeft: GUT, paddingRight: GUT }}>
           <div className="mx-auto max-w-[1240px]">
             <h2
               className="font-extralight tracking-[-0.035em] text-[#F5F5F0]"
-              style={{ fontSize: 'clamp(1.8rem,4vw,2.6rem)' }}
+              style={{ fontSize: 'clamp(1.7rem,3.6vw,2.5rem)', lineHeight: 1.2 }}
             >
               Four tracks. One philosophy.
             </h2>
+            <p className="text-[0.9rem] text-[#6E7585]" style={{ marginTop: '0.9rem' }}>
+              Keep scrolling to move across them.
+            </p>
           </div>
-        </div>
-
-        <div className="w-full md:hidden" style={{ paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)', marginBottom: '2.5rem' }}>
-          <h2 className="font-extralight tracking-[-0.035em] text-[#F5F5F0]" style={{ fontSize: 'clamp(1.8rem,6vw,2.4rem)' }}>
-            Four tracks. One philosophy.
-          </h2>
         </div>
 
         <div
           ref={trackRef}
-          className="flex w-full flex-col gap-5 md:w-auto md:flex-row md:gap-[26px]"
-          style={{ paddingLeft: 'clamp(22px,5vw,64px)', paddingRight: 'clamp(22px,5vw,64px)', willChange: 'transform' }}
+          className="flex w-full flex-col gap-4 md:w-auto md:flex-row md:gap-[22px]"
+          style={{ paddingLeft: GUT, paddingRight: GUT, marginTop: '2.75rem', willChange: 'transform' }}
         >
           {SHEETS.map((s) => {
             const inner = (
               <>
-                <h3 className="font-light tracking-[-0.025em] text-[#F5F5F0]" style={{ fontSize: '1.7rem' }}>
+                <h3 className="font-light tracking-[-0.025em] text-[#F5F5F0]" style={{ fontSize: '1.6rem' }}>
                   {s.name}
                 </h3>
                 <p className="text-[0.92rem] leading-[1.75] text-[#A7ADBB]" style={{ marginTop: '0.75rem' }}>
                   {s.desc}
                 </p>
                 <span
-                  className={`text-[0.84rem] ${s.live ? 'text-[#71E6E1]' : 'text-[#E8B95B]'}`}
-                  style={{ marginTop: '1.4rem', display: 'block' }}
+                  className={`block text-[0.84rem] ${s.live ? 'text-[#71E6E1]' : 'text-[#E8B95B]'}`}
+                  style={{ marginTop: '1.3rem' }}
                 >
                   {s.live ? 'Open' : 'In the forge'}
                 </span>
@@ -96,12 +92,10 @@ export default function SheetsSection() {
             );
 
             const cls =
-              'flex flex-col justify-end rounded-[22px] border border-white/10 md:h-[min(54vh,420px)] md:flex-[0_0_min(78vw,400px)]';
+              'flex flex-col justify-end rounded-[20px] border border-white/10 md:h-[min(44vh,340px)] md:flex-[0_0_min(74vw,370px)]';
             const st = {
-              padding: '34px 32px',
+              padding: '28px 28px',
               background: 'linear-gradient(170deg,rgba(255,255,255,.05),rgba(255,255,255,.012))',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
             } as const;
 
             return s.live ? (
@@ -116,15 +110,20 @@ export default function SheetsSection() {
           })}
         </div>
 
-        <div
-          className="absolute hidden h-[2px] rounded-full bg-white/[.06] md:block"
-          style={{ bottom: '52px', left: 'clamp(22px,5vw,64px)', right: 'clamp(22px,5vw,64px)' }}
-        >
-          <span
-            ref={barRef}
-            className="block h-full rounded-full"
-            style={{ width: 0, background: 'linear-gradient(90deg,#71E6E1,#9B8CFF)' }}
-          />
+        <div style={{ paddingLeft: GUT, paddingRight: GUT, marginTop: '2.5rem' }}>
+          <div className="mx-auto hidden h-[2px] max-w-[1240px] rounded-full bg-white/[.06] md:block">
+            <span
+              ref={barRef}
+              className="block h-full rounded-full"
+              style={{ width: 0, background: 'linear-gradient(90deg,#71E6E1,#9B8CFF)' }}
+            />
+          </div>
+
+          <div className="mx-auto max-w-[1240px] md:hidden" style={{ marginTop: '2rem' }}>
+            <Link href="/sheets" className="text-[0.9rem] text-[#71E6E1]">
+              See all sheets
+            </Link>
+          </div>
         </div>
       </div>
     </section>

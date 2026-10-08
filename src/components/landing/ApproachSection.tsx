@@ -27,7 +27,7 @@ export default function ApproachSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          className="grid grid-cols-1 items-end gap-9 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20"
+          className="grid grid-cols-1 items-start gap-9 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20"
         >
           <h2
             className="font-extralight tracking-[-0.03em] text-[#F5F5F0]"
@@ -38,7 +38,7 @@ export default function ApproachSection() {
 
           <p
             className="text-[#A7ADBB]"
-            style={{ maxWidth: '46ch', fontSize: '1.02rem', lineHeight: 1.9 }}
+            style={{ maxWidth: '46ch', fontSize: '1.02rem', lineHeight: 1.9, marginTop: '0.55rem' }}
           >
             Two hundred problems in arbitrary order teaches you two hundred tricks
             and no instinct. We order them so each one leans on the last, and we

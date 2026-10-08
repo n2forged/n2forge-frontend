@@ -56,7 +56,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-7 md:flex">
           <Link
-            href="/#sheets"
+            href="/sheets"
             className="text-sm text-[#A7ADBB] transition-colors hover:text-[#F5F5F0]"
           >
             Sheets
